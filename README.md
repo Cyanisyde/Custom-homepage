@@ -31,7 +31,8 @@ This homepage offers a lot of quick and easy customization. Take note that all c
 - Adding your own name to the top of the website
     - In the object named welcomeText change the value of the existing key-value pair to your desired name
 
-
+### Special Thanks
+   - [@p-kostic] (Introduction to the language and various bug fixing)
 
 
 
@@ -40,4 +41,5 @@ This homepage offers a lot of quick and easy customization. Take note that all c
 
    [Github pages]: <https://github.com/gitname/react-gh-pages>
    [here]: <https://cyanisyde.github.io/custom-homepage/>
+   [@p-kostic]: <https://github.com/p-kostic>
    
