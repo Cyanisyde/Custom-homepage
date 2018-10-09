@@ -32,7 +32,8 @@ This homepage offers a lot of quick and easy customization. Take note that all c
     - In the object named welcomeText change the value of the existing key-value pair to your desired name
 
 ### Special Thanks
-   - [@p-kostic] (Introduction to the language and various bug fixing)
+   - [@p-kostic] (Introduction to the language, various bug fixing, and constructing the logic for importing an easily changeable .json file to add categories and links to the website
+)
 
 
 
