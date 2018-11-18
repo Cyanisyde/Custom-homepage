@@ -12,7 +12,8 @@ A demo of the website can be seen at [here]
 
   - Clone the master branch.
   - Make the appropriate changes to customize your experience in /src/website.json
-  - Build the app and host it. (A free option is [Github pages])
+  - Build the app by executing the command "react-scripts build" in the root directory of the project. 
+  - Host it. A free option is [Github pages]
 
 ## Customization
 This homepage offers a lot of quick and easy customization. Take note that all customization in this part takes place in the file /src/website.json
