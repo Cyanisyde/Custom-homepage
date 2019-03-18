@@ -41,7 +41,8 @@
                  "Orpheus" : "https://orpheus.network/",
                  "MyAnonaMouse" : "https://www.myanonamouse.net/",
                  "IPTorrents" : "https://iptorrents.com/",
-                 "TorrentLeech" : "https://www.torrentleech.org/"
+                 "TorrentLeech" : "https://www.torrentleech.org/",
+				 "PassThePopcorn" : "https://passthepopcorn.me/"
  
              },
  
@@ -77,7 +78,7 @@
  
      "welcomeText" :
      {
-         "name" : "1234567890 123"
+         "name" : "Mikael"
      }
  
  }
