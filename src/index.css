@@ -31,6 +31,7 @@
   text-align: center;
   text-decoration: none;
   display: block;
+  cursor: default;
 }
 ul, li{
   list-style-type: none;
