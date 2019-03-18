@@ -12,7 +12,7 @@ A demo of the website can be seen at [here]
 
   - Clone the master branch.
   - Make the appropriate changes to customize your experience in /src/website.json
-  - Build the app by executing the command "react-scripts build" in the root directory of the project. 
+  - Build the app by executing the command "npm run build" in the root directory of the project. 
   - Host it. A free option is [Github pages]
 
 ## Customization
