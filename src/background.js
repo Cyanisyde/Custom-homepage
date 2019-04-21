@@ -9,7 +9,7 @@ function canvasApp(){
   var h=canvas.height=window.innerHeight;
   var yPositions=Array(275).join(0).split('');
   function runMatrix(){
-    if(typeof this.Game_Interval!='undefined')clearInterval(this.Game_interval);
+    if(typeof this.Game_Interval!=='undefined')clearInterval(this.Game_interval);
     this.Game_Interval=setInterval(drawScreen,45);
   }
   function drawScreen(){

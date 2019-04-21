@@ -2,23 +2,29 @@ import React, { Component } from 'react';
 import './App.css';
 import data from "./website.json";
 import moment from 'moment';
-import * as backgroundmatrix from "./background.js";
+import "./background.js";
 
 class App extends Component {
+
+  componentWillMount(){
+    document.title = "Welcome " + Object.values(parsedData.welcomeText);
+  }
   render() {
     return (
       <div id="body">
-
         <div id="mainContainerParent">
-          
+        <WelcomeText/>
           <div id="mainContainer">
-            <WelcomeText/>  
+              
             <Searchbar/>
             <SearchbarList/>
             <div id="dropdownContainer"> <List data={data}/> </div> 
           </div>
         </div>
-        <Calendar/>
+        <div id="info-holder">
+          <Calendar/>
+          <LastfmHandler/>
+        </div>
         <Matrixbackground/>
         
       </div> 
@@ -41,58 +47,115 @@ function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-
 class WelcomeText extends React.Component{
   constructor(){
     super();    
     this.nameLoader = this.nameLoader.bind(this);
+
+    this.state = {
+      textValue : 'temp?'
+    }
   }
   componentDidMount(){
     this.nameLoader();
   }
   async nameLoader(){
-    // var name = Object.values(parsedData.welcomeText)
+    var name = Object.values(parsedData.welcomeText)
+    var textTD = "Welcome " + name;
 
-
-    // var bigText = document.getElementById("bigText");
-    // var textTD = "Welcome " + name[0];
-    // bigText.innerHTML = textTD;
-    
-    // for(var i=0; i<textTD.length ; i++){
-    //   console.log(i, bigText.innerHTML[i]);
-    //   bigText.innerHTML[i].style.opacity = '1';
-    //   await sleep(100);
-    // }
-
-    
-    
-
+    this.setState({
+      textValue: textTD
+    })
   }
 
   render(){
     return(
-      <div id="animationDiv">
-        <svg id="animationHolder">
-            <text id="animationText" y="50" >Welcome Mikael
-              <animate id="outlineAnimation" attributeName="stroke-dashoffset"from="1000"to="600" dur="5.5s" fill="freeze"/> 
+      <svg id="animationHolder" preserveAspectRatio="xMidYMid meet" viewBox="0 0 66 100">
+          <text id="animationText" textAnchor="middle" alignmentBaseline="middle" x="50%" y="50%">{this.state.textValue}
+            <animate id="outlineAnimation" attributeName="stroke-dashoffset"from="1000"to="600" dur="5.5s" fill="freeze"/> 
 
-              <animate attributeName="fill" values="#33363D;#0C85D3"  begin="outlineAnimation.end - 0.5" dur="1s" fill="freeze"/>
-          </text>
-        </svg>
-      </div>
+            <animate attributeName="fill" values="#33363D;#0C85D3"  begin="outlineAnimation.end - 0.5" dur="1s" fill="freeze"/>
+        </text>
+      </svg>
     );
   }
 }
 
+class LastfmHandler extends React.Component{
+  constructor(){
+    super();
+
+    this.username = Object.values(parsedData.lastfm)[0];
+    this.apikey = Object.values(parsedData.lastfm)[1];
+    this.activate = Object.values(parsedData.lastfm)[2];
+    this.relInfoList = ["", "", ""];
+
+    this.state ={
+      curArtist : "",
+      curSong : "",
+      curAlbum : "",
+      curOBJ : ""
+    }
+  }
+
+  componentWillMount(){
+    if (this.activate === "true"){
+      this.setSongInfoToState();
+    }
+  }
+  componentDidMount(){
+    if (this.activate === "true"){
+      setInterval( () => {
+        this.setSongInfoToState();
+      },5000) 
+    }
+  }
+
+setSongInfoToState = async () => {
+  const ppll = await this.getRecentlyPlayed();  //Assigment needed to cause slowdown for the code to run in correct sequence. Rly cringe hack :)
+  try{
+    if(Object.values(this.state.curOBJ.recenttracks.track[0]["@attr"]) == "true"){
+      this.setState({
+        curArtist : Object.values(this.state.curOBJ.recenttracks.track[0].artist["#text"]),
+        curSong : Object.values(this.state.curOBJ.recenttracks.track[0].name),
+        curAlbum : Object.values(this.state.curOBJ.recenttracks.track[0].album["#text"])
+      });  
+    } 
+  }
+  catch(e){
+    this.setState({
+      curArtist : "No song scrobbling",
+      curSong : "",
+      curAlbum : ""
+    })
+  }
+}
+
+getRecentlyPlayed = async () => {
+  await fetch("http://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user="+this.username+"&api_key="+this.apikey+"&format=json").then(respone => respone.json()).then(json => {
+    this.setState({
+      curOBJ : json
+    });
+  })
+}
+
+  render() {
+      return (
+        <div id="music-holder">
+          <p class="info-text" id="music-text">{this.state.curArtist}<br/>{this.state.curSong}<br/>{this.state.curAlbum}</p>
+        </div>
+      );
+  }
+}
 
 class Calendar extends React.Component{
   constructor() {
     super();
 
     this.state = {
-      curDay : null,
-      curDate : null,
-      curTime: null
+      curDay : "",
+      curDate : "",
+      curTime: ""
     }
   }  
   componentDidMount() {
@@ -115,19 +178,13 @@ class Calendar extends React.Component{
 
   render() {
     return (
-      <div id="datetime-text-holder">
-        <p className="datetime-text">{this.state.curDay} <br/> {this.state.curDate} <br/> {this.state.curTime} </p>
-      </div>
+      <p className="info-text">{this.state.curDay} <br/> {this.state.curDate} <br/> {this.state.curTime} </p>
     );
   }
 }
 
 
 class Matrixbackground extends React.Component{
-  constructor(){
-    super();
-  }
-
   render(){
     return(
         <canvas id="myCanvas"></canvas>
@@ -148,32 +205,24 @@ class Searchbar extends React.Component {
   openSearchedPage(searchValue) {
     var keys = Object.keys(parsedData.searchValues.searchTags)
     var self = this;
-    console.log("listeroni", keys);
-    console.log("self", self);
     if(this.searchTag === ""){
       window.location.replace("https://www.google.com/search?q=" + searchValue);
       return true;
     }
     keys.some(function(key) {
-      console.log(self.searchTag, "ogid");
-      console.log(key, "key")
       if (self.searchTag === key) {
         window.location.replace(parsedData.searchValues.searchTags[key] + searchValue);
-        console.log("naviagted 1st to", parsedData.searchValues.searchTags[key] + searchValue, "<--- first asdkjmkjasdl");
         return true;
       } 
     });
-    
-     // window.location.replace("https://www.google.com/search?q=" + searchValue);
-     //  return true;
     
   }
 
   keyPress(e){
     var theTextbox = document.getElementById("search-bar");
 
-    if(e.keyCode == 32){
-      if(theTextbox.value[0] == '!' && theTextbox.value[2] == ' '){
+    if(e.keyCode === 32){
+      if(theTextbox.value[0] === '!' && theTextbox.value[2] === ' '){
         this.searchTag = theTextbox.value[0] + theTextbox.value[1];
 
         switch(this.searchTag){
@@ -198,15 +247,14 @@ class Searchbar extends React.Component {
             break;
   
           default:
-            theTextbox.placeholder = "You messed up A-Aron";
+            theTextbox.placeholder = "You messed up A-A-ron";
             theTextbox.value = "";
             break;
         }
-        console.log(this.searchTag, "ogtag");  
       }
     }
 
-    if(e.key == 'Enter'){
+    if(e.key === 'Enter'){
       this.openSearchedPage(document.getElementById("search-bar").value);
     }
   }
@@ -215,9 +263,11 @@ class Searchbar extends React.Component {
     var searchBar = document.getElementById("search-bar");
     var infoList = document.getElementById("search-info-container");
     var textBars = document.getElementsByClassName("search-info-desc");
+    var svgContainer = document.getElementById("animationHolder");
 
     searchBar.style.height = '40px';
     infoList.style.display = 'flex';
+    svgContainer.style.opacity = '0';
 
     for(var i = 0; i<textBars.length; i++ ){
       await sleep(50);
@@ -230,18 +280,18 @@ class Searchbar extends React.Component {
     var infoList = document.getElementById("search-info-container");
     var textBars = document.getElementsByClassName("search-info-desc");
     var revTextBars = [].slice.call(textBars, 0).reverse()
-    
+    var svgContainer = document.getElementById("animationHolder");
+
     
     for(var i=0; i<textBars.length; i++){
       await sleep(50);
       revTextBars[i].style.opacity = '0';
-      
     }
     await sleep(200);
     infoList.style.display = 'none';
     await sleep(50);
     searchBar.style.height = '30px';
-    
+    svgContainer.style.opacity = '1';
   }
 
   
@@ -259,7 +309,7 @@ class SearchbarList extends React.Component{
     return(
       <div id="search-info-container">
         <ul id="search-info-list">
-          <li class="search-info-desc"><center>Change Search: Type 2 Character Code Followed By a Space</center></li>
+          <li className="search-info-desc"><center>Change Search: Type 2 Character Code Followed By a Space</center></li>
           <SearchbarListItem/>
         </ul>
       </div>
@@ -304,27 +354,3 @@ class Item extends React.Component{
       );
   }
 }
-
-
-
-
-// class List extends React.Component{
-  
-//   render() {
-//     return ( 
-//       mapObject(parsedData.categories, function (key, value) {
-//         return (
-//         <ul className="testing">
-//           <li>
-//             {key}
-//               <ul> 
-//                 <Item key={key} details={parsedData.categories[key]}/> 
-//               </ul>
-//           </li>
-//         </ul>);
-//       })
-//     );
-//   }
-// }
-
-

@@ -79,6 +79,12 @@
      "welcomeText" :
      {
          "name" : "Mikael"
+     },
+
+     "lastfm" :
+     {
+         "username" : "Cyanisyde",
+         "apikey" : "",
+         "activate" : "true"
      }
- 
  }
