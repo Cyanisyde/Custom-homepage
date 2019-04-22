@@ -132,7 +132,7 @@ setSongInfoToState = async () => {
 }
 
 getRecentlyPlayed = async () => {
-  await fetch("http://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user="+this.username+"&api_key="+this.apikey+"&format=json").then(respone => respone.json()).then(json => {
+  await fetch("https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user="+this.username+"&api_key="+this.apikey+"&format=json").then(respone => respone.json()).then(json => {
     this.setState({
       curOBJ : json
     });
