@@ -112,9 +112,9 @@ class LastfmHandler extends React.Component{
   }
 
 setSongInfoToState = async () => {
-  const ppll = await this.getRecentlyPlayed();  //Assigment needed to cause slowdown for the code to run in correct sequence. Rly cringe hack :)
+  const ppll = await this.getRecentlyPlayed();  //Assigment needed to cause slowdown for the code to run in correct sequence. Really cringe hack :)
   try{
-    if(Object.values(this.state.curOBJ.recenttracks.track[0]["@attr"]) == "true"){
+    if(Object.values(this.state.curOBJ.recenttracks.track[0]["@attr"])[0] === "true"){
       this.setState({
         curArtist : Object.values(this.state.curOBJ.recenttracks.track[0].artist["#text"]),
         curSong : Object.values(this.state.curOBJ.recenttracks.track[0].name),
@@ -158,6 +158,10 @@ class Calendar extends React.Component{
       curTime: ""
     }
   }  
+  componentWillMount(){
+    this.tick();
+  }
+
   componentDidMount() {
     setInterval( () => {
       this.tick();
@@ -215,7 +219,6 @@ class Searchbar extends React.Component {
         return true;
       } 
     });
-    
   }
 
   keyPress(e){
