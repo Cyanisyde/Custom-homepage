@@ -1,14 +1,16 @@
 import React from 'react';
 
 class Searchbar extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.openSearchedPage = this.openSearchedPage.bind(this);
         this.focusedAnimation = this.focusedAnimation.bind(this);
         this.unfocusedAnimation = this.unfocusedAnimation.bind(this);
         this.sleep = this.sleep.bind(this);
         this.keyPress = this.keyPress.bind(this);
         this.searchTag = "";
+        this.searchTags = Object(this.props.parsedData.searchValues.searchTags);
+        this.searchInfo = Object(this.props.parsedData.searchValues.searchInfo);
     }
 
     openSearchedPage(searchValue) {
@@ -30,35 +32,12 @@ class Searchbar extends React.Component {
         var theTextbox = document.getElementById("search-bar");
 
         if (e.keyCode === 32) {
-            if (theTextbox.value[0] === '!' && theTextbox.value[2] === ' ') {
-                this.searchTag = theTextbox.value[0] + theTextbox.value[1];
 
-                switch (this.searchTag) {
-                    case '!r':
-                        theTextbox.placeholder = "Reddit";
-                        theTextbox.value = "";
-                        break;
-
-                    case '!w':
-                        theTextbox.placeholder = "Wikipedia";
-                        theTextbox.value = "";
-                        break;
-
-                    case '!y':
-                        theTextbox.placeholder = "Youtube";
-                        theTextbox.value = "";
-                        break;
-
-                    case '!g':
-                        theTextbox.placeholder = "Google";
-                        theTextbox.value = "";
-                        break;
-
-                    default:
-                        theTextbox.placeholder = "You messed up A-A-ron";
-                        theTextbox.value = "";
-                        break;
-                }
+            console.log(this.searchTags);
+            if (Object.keys(this.searchTags).includes(theTextbox.value.slice(0, -1))) {
+                this.searchTag = theTextbox.value.slice(0, -1);
+                theTextbox.placeholder = this.searchInfo[theTextbox.value.slice(0, -1)];
+                theTextbox.value = "";
             }
         }
 
