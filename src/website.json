@@ -3,45 +3,29 @@
         "forums": {
             "r/all": "https://reddit.com/r/all/",
             "r/LeagueOfLegends": "https://reddit.com/r/LeagueOfLegends",
-            "r/Runescape": "https://reddit.com/r/runescape",
             "r/Sweden": "https://www.reddit.com/r/sweden/",
-            "r/Livestreamfails": "https://reddit.com/r/livestreamfail",
-            "r/HipHopHeads": "https://reddit.com/r/HipHopHeads",
-            "r/NightLovell": "http://reddit.com/r/nightlovell",
-            "r/HooliganChase": "http://reddit.com/r/hooliganchase",
-            "r/Trackers": "http://reddit.com/r/trackers",
-            "Flashback": "https://flashback.org/",
-            "PTG": "http://boards.4chan.org/g/catalog#s=ptg",
-            "Sverigetråden": "http://boards.4chan.org/int/catalog#s=sverige"
+            "Slashdot": "https://slashdot.org/",
+            "Techcrunch": "https://techcrunch.com/",
+            "Recode": "https://www.vox.com/recode"
         },
         "entertainment": {
-            "Twitch": "https://twitch.tv/following/",
-            "Youtube": "https://www.youtube.com/playlist?list=FL33FXcz__GDgP-pUqwnMXYg",
-            "Soundcloud": "https://soundcloud.com/you/likes/",
-            "LastFM": "https://www.last.fm/user/cyanisyde",
-            "Github": "https://github.com/Cyanisyde"
+            "Twitch": "https://www.twitch.tv/",
+            "Youtube": "https://www.youtube.com/",
+            "Soundcloud": "https://soundcloud.com/",
+            "LastFM": "https://www.last.fm/",
+            "Github": "https://github.com/"
         },
         "social media": {
             "Facebook": "http://facebook.com/",
             "Instagram": "http://instagram.com/",
             "Twitter": "http://twitter.com/",
-            "Tumblr": "https://mvkael.tumblr.com/"
-        },
-        "trackers": {
-            "Redacted": "http://redacted.ch/",
-            "Animebytes": "http://animebytes.tv/",
-            "GazelleGames": "https://gazellegames.net/",
-            "MoreThanTv": "http://morethan.tv/",
-            "Orpheus": "https://orpheus.network/",
-            "MyAnonaMouse": "https://www.myanonamouse.net/",
-            "IPTorrents": "https://iptorrents.com/",
-            "TorrentLeech": "https://www.torrentleech.org/",
-            "PassThePopcorn": "https://passthepopcorn.me/"
+            "Tumblr": "https://tumblr.com/"
         },
         "school": {
             "KTH": "http://kth.se/",
             "Ladok": "https://www.student.ladok.se/student/#/aktuell",
             "Canvas": "https://kth.instructure.com/",
+            "Calendar": "https://calendar.google.com/calendar/r",
             "Wikipedia": "https://www.wikipedia.com/",
             "Drive": "https://drive.google.com/drive/u/0/my-drive"
         }
@@ -61,11 +45,19 @@
         }
     },
     "welcomeText": {
-        "name": "Mikael"
+        "name": "Morpheus"
     },
     "lastfm": {
-        "username": "Cyanisyde",
-        "apikey": "",
-        "activate": "true"
+        "username": "yourUserNamehere",
+        "apikey": "yourApiKeyHere",
+        "activate": "false"
+    },
+    "colorSettings": {
+        "nameColorFlash": "#33363D",
+        "nameColorOutline": "#0C85D3",
+        "nameColorFill": "#0C85D3",
+        "categoryCircleBackground": "#1f2326",
+        "categoryCircleText": "#ffffff",
+        "matrixRain": "#0C85D3"
     }
 }

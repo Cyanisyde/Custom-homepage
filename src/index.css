@@ -1,8 +1,8 @@
 @import url(https://fonts.googleapis.com/css?family=Crete+Round);
 @import url(https://fonts.googleapis.com/css?family=Pacifico);
 #category-cirle {
-  background-color: #1f2326;
-  color: white;
+  /* background-color: #1f2326;
+  color: white; */
   padding: 16px;
   font-size: 16px;
   height: 25px;
@@ -40,7 +40,6 @@ ul, li{
   color: #ffffff;
   text-decoration: none;
 }
-
 #dropdown:hover #category-cirle {
   opacity: 0;
 }
@@ -80,7 +79,6 @@ ul, li{
   background-color: #1f2326;
   font-size: 9pt;
 }
-
 #search-bar{
   background: 0 0;
   font-size: 1.76em;
@@ -100,10 +98,6 @@ ul, li{
 #search-bar:focus{
   color: whitesmoke;
 }
-/* #search-bar:focus ~ .search-info-desc{
-  color: red;
-} */
-
 html, body{
   margin: 0;
   background-color: black;
@@ -126,7 +120,6 @@ html, body{
   width: inherit;
   z-index: 1;
 }
-
 #search-info-container{
   margin-top: 8px;
   transition: .2s cubic-bezier(.4,0,.2,1) .2s;
@@ -186,15 +179,11 @@ html, body{
   height:100%
 }
 #animationText{
-  stroke: #0C85D3;
   stroke-width: 1;
   font-size: 4.05em;
   stroke-dasharray: 1000;
   stroke-dashoffset: 1000;
   top:50%;
-}
-#music-holder{
-  
 }
 #spectrumHolder{
   transform: rotate(180deg);
@@ -220,4 +209,3 @@ html, body{
   width: 50px;
   height: 200px;
 }
-
