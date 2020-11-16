@@ -60,6 +60,6 @@ This homepage offers a lot of quick and easy customization. Take note that all c
 
 
    [Github pages]: <https://github.com/gitname/react-gh-pages>
-   [here]: <https://cyanisyde.github.io/custom-homepage/>
+   [here]: <https://mikaeljafari.github.io/custom-homepage/>
    [this]: <https://www.last.fm/api/authentication>
    [@p-kostic]: <https://github.com/p-kostic>
